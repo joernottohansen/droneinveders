@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Droneskyting</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="animer.js">
+    <link rel="stylesheet" href="p5.js">
+</head>
+<body>
+    <!-- html del -->   
+    <div id="background">
+        <div id="player"></div>
+        <!-- <div id="drone"></div> -->
+        <div id="droner"></div>
+
+    </div>
+    
+    <script>
+        var player = {
+            top: 530,
+            left: 300
+        };
+
+        var droner = [
+            { left: 200, top: 100 },
+            { left: 250, top: 100 },
+            { left: 300, top: 100 },
+            { left: 350, top: 100 },
+            { left: 400, top: 100 },
+            { left: 450, top: 100 },
+            { left: 500, top: 100 },
+            { left: 550, top: 100 },
+            { left: 600, top: 100 },
+            { left: 700, top: 175 },
+            { left: 200, top: 175 },
+            { left: 250, top: 175 },
+            { left: 300, top: 175 },
+            { left: 350, top: 175 },
+            { left: 400, top: 175 },
+            { left: 450, top: 175 },
+            { left: 500, top: 175 },
+            { left: 550, top: 175 },
+            { left: 600, top: 175 },
+            { left: 650, top: 175 },
+            { left: 700, top: 175 },
+        ];
+    document.onkeydown = function(e){
+
+        if (e.keyCode === 37 || e.keyCode === 65) {
+                player.left += -2;
+                flyttPlayer();
+        }
+        if (player.left < 10){
+                player.left = 5;
+                flyttPlayer();
+        }
+           
+        if (e.keyCode === 39 || e.keyCode === 68) {
+                player.left += 2;
+                flyttPlayer();
+        }
+
+        if(player.left > 560){
+            player.left = 560;
+            flyttPlayer();
+        }    
+        
+        if (e.keyCode === 32){
+            console.log("");
+        }
+
+        }
+
+        function flyttPlayer() {
+            document.getElementById('player').style.left = player.left + 'px';
+            document.getElementById('player').style.top = player.top + 'px';
+        }
+
+        function tegnDroner(){
+            document.getElementById('droner').innerHTML = "";
+            for( var drone = 0; drone < droner.length; drone++){
+                document.getElementById('droner').innerHTML +=
+               `<div class='drone' style='left:${droner[i].left}px; top:${droner[i].top}px'></div>`;
+            }
+        }
+
+        function flyttDroner() {
+            for(var i = 0 ; i < droner.length ; i++ ) {
+                droner[i].top = droner[i].top + 1;
+            }
+        }
+        function gameLoop() {
+            setTimeout(gameLoop, 1000)
+            flyttDroner();
+            tegnDroner();
+            //moveEnemies();
+            //drawEnemies();
+            //collisionDetection();
+        }
+        
+        gameLoop()
+
+    </script>
+
+
+    
+</body>
+</html>
